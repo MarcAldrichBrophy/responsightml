@@ -25,6 +25,7 @@ export default {
       script.async = true
       document.head.appendChild(script)
       window.initGoogleMap = () => {
+        // eslint-disable-next-line no-undef
         window.google = google
         window.map = new window.google.maps.Map(element, {
           center: {

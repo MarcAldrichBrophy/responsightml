@@ -1,15 +1,27 @@
+<script>
+import listMenu from "@/components/listMenu.vue";
+export default {
+  components: {
+    listMenu
+  }
+};
+</script>
+
 <template>
-  <div class="logoWrapper">
-    <div class="circle">
+  <div class="titleWrapper">
+    <div class="logoWrapper">
+      <div class="circle">
         <img id="car" src="/car.png">
+      </div>
+      <span class="title">SafeDrive ML</span>
     </div>
-    <span class="title">SafeDrive ML</span>
+    <listMenu />
   </div>
 </template>
 
 <style scoped>
-.logoWrapper {
-  display: flex;
+.titleWrapper {
+  /* display: flex; */
   align-items: center;
   color: white;
   text-align: center;
@@ -21,6 +33,11 @@
   overflow: hidden;
   background-color: #333;
   right: 0;
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
 }
 
 .circle {

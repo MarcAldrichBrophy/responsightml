@@ -1,27 +1,16 @@
-<script>
-import listMenu from "@/components/listMenu.vue";
-export default {
-  components: {
-    listMenu
-  }
-};
-</script>
-
 <template>
   <div class="titleWrapper">
     <div class="logoWrapper">
       <div class="circle">
         <img id="car" src="/car.png">
       </div>
-      <span class="title">SafeDrive ML</span>
+      <span class="title">ResponseSight ML</span>
     </div>
-    <listMenu />
   </div>
 </template>
 
 <style scoped>
 .titleWrapper {
-  /* display: flex; */
   align-items: center;
   color: white;
   text-align: center;

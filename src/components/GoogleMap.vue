@@ -12,26 +12,11 @@ export default {
     const googleMap = ref(null)
     onMounted(() => {
       initMap(googleMap.value, () => {
-        // Sample
-        const data = [{
-            position: {
-              lat: 37.754938,
-              lng: -122.412149
-            }
-          },
-          {
-            position: {
-              lat: 37.772153,
-              lng: -122.437827
-            }
-          }
-        ]
-
-        for (let marker of data) {
-          window.addMarker(marker)
-        }
+        getDangerousSlowdowns().then(data => {
+          setHeatMap(data)
+        })
       })
-    });
+    })
 
     const initMap = (element, cb) => {
       const script = document.createElement('script');
@@ -41,7 +26,7 @@ export default {
       document.head.appendChild(script)
       window.initGoogleMap = () => {
         window.google = google
-        window.map = new google.maps.Map(element, {
+        window.map = new window.google.maps.Map(element, {
           center: {
             lat: 37.749385,
             lng: -122.435931
@@ -49,26 +34,6 @@ export default {
           zoom: 13,
           fullscreenControl: false
         })
-
-        function addMarker({
-          position
-        }) {
-          return new google.maps.Marker({
-            position,
-            map: getMap()
-          })
-        }
-        window.addMarker = addMarker
-        setHeatMap([
-            {lat: 37.782, lng: -122.441},
-            {lat: 37.782, lng: -122.439},
-            {lat: 37.782, lng: -122.435},
-            {lat: 37.785, lng: -122.447},
-            {lat: 37.785, lng: -122.445},
-            {lat: 37.785, lng: -122.441},
-            {lat: 37.785, lng: -122.437},
-            {lat: 37.785, lng: -122.435}
-          ])
         cb()
       }
     }
@@ -78,17 +43,23 @@ export default {
   },
 }
 
-function getMap() {
-  return window.map
-}
-
 function setHeatMap(data) {
-  var heatmapData = data.map(item => new window.google.maps.LatLng(item.lat, item.lng))
-  var heatmap = new window.google.maps.visualization.HeatmapLayer({
+  const heatmapData = data.map(item => {
+    return {
+      location: new window.google.maps.LatLng(item.lat, item.lng),
+      weight: item.weight
+    }
+  })
+  const heatmap = new window.google.maps.visualization.HeatmapLayer({
     data: heatmapData
   })
   heatmap.setOptions({ radius: 20 })
-  heatmap.setMap(getMap())
+  heatmap.setMap(window.map)
+}
+
+async function getDangerousSlowdowns() {
+  const request = await fetch('https://3qt2pgrotb.execute-api.us-west-2.amazonaws.com/clearway-prod/inrix?endpoint=dangerousSlowdowns')
+  return await request.json()
 }
 
 </script>

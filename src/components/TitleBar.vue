@@ -4,7 +4,7 @@
       <div class="circle">
         <img id="car" src="/car.png">
       </div>
-      <span class="title">ResponseSight ML</span>
+      <span class="title">ResponSight ML</span>
     </div>
   </div>
 </template>

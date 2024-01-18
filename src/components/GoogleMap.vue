@@ -4,6 +4,7 @@
 
 <script>
 import { ref, onMounted } from 'vue';
+import points from '@/assets/points.json'
 
 const apiKey = 'AIzaSyDs_SM5TySlGu_UvaWIKEi3uVAwq2Pzn-I'
 export default {
@@ -59,8 +60,10 @@ function setHeatMap(data) {
 }
 
 async function getDangerousSlowdowns() {
-  const request = await fetch('https://3qt2pgrotb.execute-api.us-west-2.amazonaws.com/clearway-prod/inrix?endpoint=dangerousSlowdowns')
-  return await request.json()
+  // Our access to the INRIX API has been removed, so we'll use a local JSON file instead 
+  // const request = await fetch('https://3qt2pgrotb.execute-api.us-west-2.amazonaws.com/clearway-prod/inrix?endpoint=dangerousSlowdowns')
+  // return await request.json()
+  return points
 }
 
 </script>

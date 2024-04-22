@@ -1,6 +1,6 @@
 {
-  "name": "clearway-main",
-  "version": "1.0.2",
+  "name": "responsightml-main",
+  "version": "1.0.3",
   "private": true,
   "scripts": {
     "dev": "vite",

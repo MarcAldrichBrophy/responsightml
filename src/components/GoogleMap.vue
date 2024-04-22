@@ -6,7 +6,16 @@
 import { ref, onMounted } from 'vue';
 import points from '@/assets/points.json'
 
-const apiKey = 'AIzaSyDs_SM5TySlGu_UvaWIKEi3uVAwq2Pzn-I'
+const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+const googleMapsUrl = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=visualization&callback=initGoogleMap`
+const mapSettings = {
+  center: {
+    lat: parseFloat(import.meta.env.VITE_GOOGLE_MAPS_LAT),
+    lng: parseFloat(import.meta.env.VITE_GOOGLE_MAPS_LNG)
+  },
+  zoom: parseInt(import.meta.env.VITE_GOOGLE_MAPS_ZOOM),
+}
+
 export default {
   name: 'googleMap',
   setup() {
@@ -21,7 +30,7 @@ export default {
 
     const initMap = (element, cb) => {
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=visualization&callback=initGoogleMap`
+      script.src = googleMapsUrl
       script.defer = true
       script.async = true
       document.head.appendChild(script)
@@ -29,11 +38,7 @@ export default {
         // eslint-disable-next-line no-undef
         window.google = google
         window.map = new window.google.maps.Map(element, {
-          center: {
-            lat: 37.749385,
-            lng: -122.435931
-          },
-          zoom: 13,
+          ...mapSettings,
           fullscreenControl: false
         })
         cb()
@@ -61,7 +66,7 @@ function setHeatMap(data) {
 
 async function getDangerousSlowdowns() {
   // Our access to the INRIX API has been removed, so we'll use a local JSON file instead 
-  // const request = await fetch('https://3qt2pgrotb.execute-api.us-west-2.amazonaws.com/clearway-prod/inrix?endpoint=dangerousSlowdowns')
+  // const request = await fetch(import.meta.env.VITE_AWS_LAMBDA_URL)
   // return await request.json()
   return points
 }

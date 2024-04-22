@@ -1,14 +1,10 @@
-# responsightml-main
+# ResponSight ML
 
-This template should help get you started developing with Vue 3 in Vite.
+Front-end portion the ResponSight ML project that won first place the INRIX x AWS hackathon. The project itself provides automotive collision forcasting to help EMS minimize response time, by leveraging machine learning. We trained our model on historic data and use INRIX APIs to make real-time predictions.
 
-## Recommended IDE Setup
+![img](https://i.imgur.com/d7VuqHb.jpeg)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Read more about the project [here](https://devpost.com/software/responsight)!
 
 ## Project Setup
 
